@@ -73,7 +73,6 @@ public class HomeActivity extends BaseMvpActivity {
 
 
         bbl.getBottomItem(4);
-        Toast.makeText(getApplicationContext(), "首页展示成功", Toast.LENGTH_SHORT).show();
     }
 
     class MyAdapter extends FragmentPagerAdapter {

@@ -1,24 +1,31 @@
 package www.winroad.basemvp;
 
+import android.content.Context;
+
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
+import www.winroad.utils.NetWork;
 
-/**
- * Author：xiaohaibin
- * Time：2017/9/12
- * Emil：xhb_199409@163.com
- * Github：https://github.com/xiaohaibin/
- * Describe：
- */
 public class BasePresenter<V extends IView> implements IPresenter<V> {
 
     private CompositeSubscription mCompositeSubscription;
 
+    private Context mContext;
+
+    public void setContext(Context context) {
+        this.mContext = context;
+    }
+
+    public Context getContext() {
+        return mContext;
+    }
+
     protected V mView;
+
 
     @Override
     public void onStart() {
-    }
+     }
 
     @Override
     public void attachView(V mvpView) {

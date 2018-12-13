@@ -21,6 +21,7 @@ import www.winroad.entity.NewsPageBean;
 import www.winroad.mvp.contract.NewsContrcat;
 import www.winroad.mvp.presenter.NewsPresenter;
 import www.winroad.mvp.viewUi.adapter.ForumDetailsListAdapter;
+import www.winroad.utils.NetWork;
 
 
 public class NewActivity extends BaseMvpActivity<NewsPresenter> implements NewsContrcat.newsView, SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnLoadMoreListener {
@@ -152,8 +153,12 @@ public class NewActivity extends BaseMvpActivity<NewsPresenter> implements NewsC
     }
 
     private void getData() {
+
+
         currentPage = 2;
+
         mPresenter.news(String.valueOf(currentPage));
-        ToastUtils.show(currentPage);
+
+
     }
 }

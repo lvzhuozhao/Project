@@ -25,6 +25,7 @@ import me.jessyan.autosize.AutoSizeConfig;
 import me.jessyan.autosize.onAdaptListener;
 import me.jessyan.autosize.utils.LogUtils;
 import okhttp3.OkHttpClient;
+import www.winroad.utils.NetWork;
 
 public  class WinRoadApplication extends Application {
 
@@ -39,19 +40,29 @@ public  class WinRoadApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addInterceptor(new LoggerInterceptor("==3dm==", BuildConfig.DEBUG))
-                .connectTimeout(10000L, TimeUnit.MILLISECONDS)
-                .readTimeout(10000L, TimeUnit.MILLISECONDS)
-                //其他配置
-                .build();
-        OkHttpUtils.initClient(okHttpClient);
-
-
         //屏幕适配
         customAdaptForExternal();
 
         ToastUtils.init(this);
+
+        if(NetWork.checkNetWorkState(this)){
+
+            OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                    .addInterceptor(new LoggerInterceptor("==3dm==", BuildConfig.DEBUG))
+                    .connectTimeout(10000L, TimeUnit.MILLISECONDS)
+                    .readTimeout(10000L, TimeUnit.MILLISECONDS)
+                    //其他配置
+                    .build();
+            OkHttpUtils.initClient(okHttpClient);
+        }else {
+
+            ToastUtils.show("当前无网络连接！");
+        }
+
+
+
+
+
     }
 
     static {

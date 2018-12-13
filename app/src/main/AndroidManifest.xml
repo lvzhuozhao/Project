@@ -37,11 +37,7 @@
 
        <!-- 首页-->
         <activity android:name=".mvp.viewUi.activity.HomeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".mvp.viewUi.activity.MainActivity">
 
@@ -49,7 +45,11 @@
 
 
         <activity android:name=".mvp.viewUi.activity.NewActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

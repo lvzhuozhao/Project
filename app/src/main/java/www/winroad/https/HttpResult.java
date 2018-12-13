@@ -28,7 +28,7 @@ public class HttpResult<T> extends BaseResponse {
      * @return
      */
     public boolean isHttpSuccess() {
-        return code == 1;
+        return code == 10000;
     }
 
     public T getData() {
