@@ -39,7 +39,6 @@ public class HomeActivity extends BaseMvpActivity {
 
     @Override
     protected int getLayoutResource() {
-        StatusBarUtil.setColor(this, getResources().getColor(R.color.red));
 
         return R.layout.activity_home;
     }

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.Window;
 
 import com.jaeger.library.StatusBarUtil;
+import com.noober.background.BackgroundLibrary;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import butterknife.ButterKnife;
@@ -52,8 +53,8 @@ public abstract class BaseMvpActivity<P extends IPresenter> extends AppCompatAct
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        BackgroundLibrary.inject(this);//BackgroudLibrary
         super.onCreate(savedInstanceState);
-
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         StatusBarUtil.setColor(this, getResources().getColor(R.color.text_gray));
         AppManager.getAppManager().addActivity(this);

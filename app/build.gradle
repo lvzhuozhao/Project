@@ -74,4 +74,6 @@ dependencies {
 
     //吐司工具类
     implementation 'com.hjq:toast:5.0'
+
+    implementation 'com.noober.backgorund:core:1.0.5'
 }
