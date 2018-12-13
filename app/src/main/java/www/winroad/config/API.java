@@ -20,7 +20,9 @@ public class API {
 
     public static final String IP="https://my.3dmgame.com/app/";
 
-    /**
+    public static final String IPS="http://mz.touedian.com/";
+
+     /**
      * 热点
      * 方式：POST
      * 参数：

@@ -8,7 +8,7 @@ import www.winroad.entity.NewsPageBean;
 public interface NewsContrcat {
 
     interface newsModel extends IModel {
-        void news(int currentPage);
+        void news(String mid);
     }
 
     interface newsView extends IView {

@@ -65,7 +65,7 @@ public abstract class BaseMvpActivity<P extends IPresenter> extends AppCompatAct
         onInitPresenter();
 
 
-     }
+    }
 
     @Override
     protected void onStart() {
@@ -86,7 +86,7 @@ public abstract class BaseMvpActivity<P extends IPresenter> extends AppCompatAct
             mPresenter.detachView();
         }
 
-     }
+    }
 
 
     public int setToolBar(Toolbar toolbar, boolean isChangeToolbar, boolean isChangeStatusBar, DrawerLayout drawerLayout) {

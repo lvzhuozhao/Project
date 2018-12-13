@@ -1,39 +1,40 @@
 package www.winroad.mvp.viewUi.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.ColorRes;
+import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
+import android.widget.LinearLayout;
 
-
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.hjq.toast.ToastUtils;
+import com.jude.easyrecyclerview.EasyRecyclerView;
+import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
+import com.ldoublem.loadingviewlib.LVCircular;
 
 import butterknife.Bind;
-import butterknife.OnClick;
 import www.winroad.R;
 import www.winroad.base.BaseMvpActivity;
 import www.winroad.entity.NewsPageBean;
 import www.winroad.mvp.contract.NewsContrcat;
 import www.winroad.mvp.presenter.NewsPresenter;
-import www.winroad.mvp.viewUi.adapter.CommodityAdapter;
-import www.winroad.utils.Dolas;
+import www.winroad.mvp.viewUi.adapter.ForumDetailsListAdapter;
 
 
-public class NewActivity extends BaseMvpActivity<NewsPresenter> implements NewsContrcat.newsView {
+public class NewActivity extends BaseMvpActivity<NewsPresenter> implements NewsContrcat.newsView, SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnLoadMoreListener {
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.recyle)
-    RecyclerView recyle;
-    private CommodityAdapter commodityAdapter;
-    private LinearLayoutManager layoutManager;
-    private RefreshLayout mRefreshLayout;
+    @Bind(R.id.rv_list)
+    EasyRecyclerView mRecyclerView;
+    @Bind(R.id.linear)
+    LinearLayout linear;
+
     private int currentPage;
+    private ForumDetailsListAdapter forumDetailsListAdapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
 
     @Override
@@ -48,8 +49,8 @@ public class NewActivity extends BaseMvpActivity<NewsPresenter> implements NewsC
 
     @Override
     protected void onInitialization(Bundle bundle) {
-        Log.e(">>>>NewListFailed", "");
         initToolBar(toolbar, "新闻");
+
 
         initView();
 
@@ -57,84 +58,102 @@ public class NewActivity extends BaseMvpActivity<NewsPresenter> implements NewsC
 
     private void initView() {
 
-        mRefreshLayout = findViewById(R.id.refreshLayout);
+        LVCircular mLVCircular = new LVCircular(this);
+        mLVCircular.setViewColor(Color.rgb(204, 204, 204));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setRefreshingColor(Color.rgb(204, 204, 204), Color.rgb(204, 204, 204), Color.rgb(204, 204, 204));
+        mRecyclerView.setRefreshListener(this);
+        mRecyclerView.setEmptyView(R.layout.empty_view);
+        forumDetailsListAdapter = new ForumDetailsListAdapter(getApplicationContext());
+        forumDetailsListAdapter.setMore(R.layout.view_more, this);
+        forumDetailsListAdapter.setNoMore(R.layout.view_nomore);
+        forumDetailsListAdapter.setError(R.layout.view_error, new RecyclerArrayAdapter.OnErrorListener() {
+
+            @Override
+            public void onErrorShow() {
+                forumDetailsListAdapter.resumeMore();
+            }
+
+            @Override
+            public void onErrorClick() {
+                forumDetailsListAdapter.resumeMore();
+            }
+        });
+        swipeRefreshLayout = new SwipeRefreshLayout(this);
+        swipeRefreshLayout.setColorSchemeResources(R.color.color_1c1c1c, R.color.color_888888);
+        mRecyclerView.setAdapter(forumDetailsListAdapter);
 
 
     }
 
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        onRefresh();
+
+    }
 
     @Override
     public void getNewListSuccess(NewsPageBean data) {
 
 
-        LoadMore();
+        if (data != null) {
+            forumDetailsListAdapter.addAll(data.getList());
+        } else {
+            mRecyclerView.showEmpty();
+        }
+        if (forumDetailsListAdapter.getCount() == 0) {
+            mRecyclerView.showEmpty();
+
+        }
+        if (currentpage == 1) {
+            forumDetailsListAdapter.clear();
+            forumDetailsListAdapter.addAll(data.getList());
+        }
+
+        if (data.getTotal() <= pageSize) {
+            forumDetailsListAdapter.stopMore();
+        }
+
     }
 
 
     @Override
     public void getNewListFailed(String msg) {
-        Log.e(">>>>getNewListFailed", msg);
-
+        mRecyclerView.showEmpty();
+        forumDetailsListAdapter.pauseMore();
     }
 
     @Override
     public void showLoading() {
-        Dolas.Doals(NewActivity.this);
         if (currentPage == 1) {
-            mRefreshLayout.setEnableRefresh(true);
-
+            mRecyclerView.setRefreshing(true);
         }
     }
 
     @Override
     public void hideLoading() {
-        Dolas.DoalsDimess(NewActivity.this);
-
-
         if (currentPage == 1) {
-
-            mRefreshLayout.setEnableRefresh(false);
+            mRecyclerView.setRefreshing(false);
 
         }
     }
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mPresenter.news(1);
-        Refresh();
-
-        Log.i(">>>", "onCreate: ");
-
-
+    public void onRefresh() {
+        getData();
     }
 
-    public void Refresh() {
-
-        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
-
-                currentPage = 1;
-                mPresenter.news(1);
-            }
-        });
-
+    @Override
+    public void onLoadMore() {
+        currentpage++;
+        getData();
     }
 
-    public void LoadMore() {
-
-        mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore(RefreshLayout refreshlayout) {
-                refreshlayout.finishLoadMore(2000/*,false*/);//传入false表示加载失败
-                currentPage++;
-                mPresenter.news(currentPage);
-            }
-        });
+    private void getData() {
+        currentPage = 2;
+        mPresenter.news(String.valueOf(currentPage));
+        ToastUtils.show(currentPage);
     }
-
-
 }

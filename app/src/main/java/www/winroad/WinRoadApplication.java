@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 
 
+import com.hjq.toast.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreator;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreator;
@@ -25,12 +26,12 @@ import me.jessyan.autosize.onAdaptListener;
 import me.jessyan.autosize.utils.LogUtils;
 import okhttp3.OkHttpClient;
 
-public  class LxApplication extends Application {
+public  class WinRoadApplication extends Application {
 
 
-    private static LxApplication ourInstance;
+    private static WinRoadApplication ourInstance;
 
-    public static LxApplication getInstance() {
+    public static WinRoadApplication getInstance() {
         return ourInstance;
     }
 
@@ -50,6 +51,7 @@ public  class LxApplication extends Application {
         //屏幕适配
         customAdaptForExternal();
 
+        ToastUtils.init(this);
     }
 
     static {

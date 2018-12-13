@@ -4,6 +4,7 @@ import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 import rx.Observable;
 import www.winroad.entity.NewsPageBean;
 import www.winroad.entity.UserInfoBean;
@@ -43,10 +44,9 @@ public interface ApiService {
      * 参数：
      * {"pagesize":10,"page":1,"time":1535078255062,"sign":"9a19c5a6c3d10cc270ebabb17a98d3d2"}
      */
-    @Headers({"Content-Type: application/json", "Accept: application/json"})
-    @POST("newspage")
-    Observable<HttpResult<NewsPageBean>> getNews(@Body RequestBody body);
-
+    //@Headers({"Content-Type: application/json", "Accept: application/json"})
+    @POST("index.php?m=mobile&f=member&v=member_info")
+    Observable<HttpResult<NewsPageBean>> getNews(@Query("m_id")String mid);
 
 //    /**
 //     * 热点

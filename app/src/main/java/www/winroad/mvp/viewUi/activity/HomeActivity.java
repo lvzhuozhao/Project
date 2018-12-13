@@ -19,6 +19,8 @@ import www.winroad.R;
 import www.winroad.base.BaseMvpActivity;
 import www.winroad.mvp.presenter.HomePresenter;
 import www.winroad.mvp.viewUi.fragment.AdsFragment;
+import www.winroad.mvp.viewUi.fragment.HomeThreeFragment;
+import www.winroad.mvp.viewUi.fragment.HomeTwoFragment;
 import www.winroad.mvp.viewUi.fragment.PersonalFragment;
 
 
@@ -53,26 +55,25 @@ public class HomeActivity extends BaseMvpActivity {
         super.onCreate(savedInstanceState);
 
 
-
-
-        AdsFragment adsFragment=new AdsFragment();
-
-        PersonalFragment personalFragment=new PersonalFragment();
-
-        mFragmentList.add(adsFragment);
-        mFragmentList.add(personalFragment);
+        mFragmentList.add(new AdsFragment());
+        mFragmentList.add(new HomeTwoFragment());
+        mFragmentList.add(new HomeThreeFragment());
+        mFragmentList.add(new PersonalFragment());
 
 
         vpContent.setAdapter(new MyAdapter(getSupportFragmentManager()));
         bbl.setViewPager(vpContent);
-        vpContent.setOffscreenPageLimit(2);
+        vpContent.setOffscreenPageLimit(4);
+        bbl.setSmoothScroll(true);
 
         bbl.setUnread(0, 0);//设置第一个页签的未读数为20
+        bbl.setUnread(0, 0);//设置第二个页签的未读数
+        bbl.setUnread(0, 0);//设置第二个页签的未读数
         bbl.setUnread(0, 0);//设置第二个页签的未读数
 
 
 
-        bbl.getBottomItem(2);
+        bbl.getBottomItem(4);
         Toast.makeText(getApplicationContext(), "首页展示成功", Toast.LENGTH_SHORT).show();
     }
 

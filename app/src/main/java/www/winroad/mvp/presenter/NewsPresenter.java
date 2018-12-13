@@ -3,6 +3,8 @@ package www.winroad.mvp.presenter;
 import android.text.TextUtils;
 
 
+import com.hjq.toast.ToastUtils;
+
 import rx.Subscription;
 import www.winroad.basemvp.BasePresenter;
 import www.winroad.data.callback.LoadTaskCallback;
@@ -14,19 +16,23 @@ public class NewsPresenter extends BasePresenter<NewsContrcat.newsView> implemen
 
 
     @Override
-    public void news(int currentPage) {
+    public void news(String mid) {
+
 
 
         if (getView() == null) {
             return;
         }
 
-        Subscription subscription = TasksRepositoryProxy.getInstance().getNews(currentPage, new LoadTaskCallback<NewsPageBean>() {
+        Subscription subscription = TasksRepositoryProxy.getInstance().getNews(mid,new LoadTaskCallback<NewsPageBean>() {
 
             @Override
             public void onTaskLoaded(NewsPageBean data) {
 
+
                 getView().getNewListSuccess(data);
+
+
              }
 
             @Override
@@ -52,4 +58,6 @@ public class NewsPresenter extends BasePresenter<NewsContrcat.newsView> implemen
         addSubscription(subscription);
 
     }
+
+
 }

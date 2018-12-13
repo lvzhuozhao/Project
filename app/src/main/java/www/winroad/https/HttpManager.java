@@ -2,8 +2,7 @@ package www.winroad.https;
 
 import android.util.Log;
 
-import com.huijin.lonxing.LxApplication;
-import com.huijin.lonxing.config.API;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -18,6 +17,8 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import www.winroad.WinRoadApplication;
+import www.winroad.config.API;
 
 /**
  * Author Mr.xiao on 2017/3/15
@@ -55,7 +56,7 @@ public class HttpManager {
      */
     public <S> S createService(Class<S> serviceClass) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(API.IP)
+                .baseUrl(API.IPS)
                 .client(getOkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
@@ -136,10 +137,10 @@ public class HttpManager {
         builder.addInterceptor(loggingInterceptor);
 
         //设置缓存
-        File httpCacheDirectory = new File(LxApplication.getInstance().getApplicationContext().getCacheDir(), "dmgAppcache");
+        File httpCacheDirectory = new File(WinRoadApplication.getInstance().getApplicationContext().getCacheDir(), "dmgAppcache");
         builder.cache(new Cache(httpCacheDirectory, 10 * 1024 * 1024));
-        builder.addNetworkInterceptor(new CacheInterceptor(LxApplication.getInstance().getApplicationContext()));
-        builder.addInterceptor(new NormalInterceptor(LxApplication.getInstance().getApplicationContext()));
+        builder.addNetworkInterceptor(new CacheInterceptor(WinRoadApplication.getInstance().getApplicationContext()));
+        builder.addInterceptor(new NormalInterceptor(WinRoadApplication.getInstance().getApplicationContext()));
 
         return builder.build();
     }

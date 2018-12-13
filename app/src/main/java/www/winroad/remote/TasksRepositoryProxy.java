@@ -3,6 +3,7 @@ package www.winroad.remote;
 import android.util.Log;
 
 
+import com.hjq.toast.ToastUtils;
 
 import rx.Subscription;
 import www.winroad.config.ApiService;
@@ -105,37 +106,33 @@ public class TasksRepositoryProxy implements TasksDataSource {
                 });
     }
 
+
+
     @Override
-    public Subscription getNews(int currentPage, final LoadTaskCallback<NewsPageBean> callback) {
+    public Subscription getNews(String mid,final LoadTaskCallback<NewsPageBean> callback) {
         return HttpManager.getInstance().createService(ApiService.class)
-                .getNews(RequestBodyHelper.creatRequestBody(new NewsContent(currentPage)))
+                .getNews(mid)
                 .compose(TransformUtils.<HttpResult<NewsPageBean>>defaultSchedulers())
                 .subscribe(new HttpResultSubscriber<NewsPageBean>() {
                     @Override
                     public void onStart() {
                         callback.onStart();
-                        Log.e(">>>>onStart", " ");
                     }
 
                     @Override
                     public void onSuccess(NewsPageBean newsPageBean) {
-                        callback.onTaskLoaded(newsPageBean);
-                        Log.e(">>>", "onSuccess: " );
 
+                        callback.onTaskLoaded(newsPageBean);
                     }
 
                     @Override
                     public void onError(String msg, int code) {
                         callback.onDataNotAvailable(msg);
-                        Log.e(">>>>onError", " ");
-
                     }
 
                     @Override
                     public void onFinished() {
                         callback.onCompleted();
-                        Log.e(">>>>onFinished", " ");
-
                     }
                 });
     }

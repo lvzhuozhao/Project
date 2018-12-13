@@ -14,7 +14,7 @@ import android.view.animation.CycleInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
 
-import com.huijin.lonxing.R;
+import www.winroad.R;
 
 
 /**

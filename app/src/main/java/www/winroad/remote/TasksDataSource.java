@@ -99,7 +99,7 @@ public interface TasksDataSource {
 
     Subscription homein(LoadTaskCallback<UserInfoBean> callback);
 
-    Subscription getNews(int currentPage, LoadTaskCallback<NewsPageBean> callback);
+    Subscription getNews(String mid,LoadTaskCallback<NewsPageBean> callback);
 
 //    /**
 //     * 注册
