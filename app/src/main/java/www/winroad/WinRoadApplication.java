@@ -57,6 +57,7 @@ public  class WinRoadApplication extends Application {
         }else {
 
             ToastUtils.show("当前无网络连接！");
+
         }
 
 

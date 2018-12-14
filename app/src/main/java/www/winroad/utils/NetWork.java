@@ -28,7 +28,7 @@ public class NetWork {
     /**
      * 网络为连接时，设置网络
      */
-    private static void setNetWork(final Context context) {
+    public static void setNetWork(final Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("网络连接提示").setMessage("网络不可用，如果继续，请设置网络");
         builder.setPositiveButton("设置", new DialogInterface.OnClickListener() {
@@ -188,9 +188,6 @@ public class NetWork {
         if (flag){
             //判断网络类型
             isNetworkAvailable(context);
-        }else {
-            //若网络未连接，则弹出提示进行设置
-            setNetWork(context);
         }
         return flag;
     }

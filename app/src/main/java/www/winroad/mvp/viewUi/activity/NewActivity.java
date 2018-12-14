@@ -50,7 +50,7 @@ public class NewActivity extends BaseMvpActivity<NewsPresenter> implements NewsC
 
     @Override
     protected void onInitialization(Bundle bundle) {
-        initToolBar(toolbar, "新闻");
+       // initToolBar(toolbar, "新闻");
 
 
         initView();
@@ -59,8 +59,7 @@ public class NewActivity extends BaseMvpActivity<NewsPresenter> implements NewsC
 
     private void initView() {
 
-        LVCircular mLVCircular = new LVCircular(this);
-        mLVCircular.setViewColor(Color.rgb(204, 204, 204));
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setRefreshingColor(Color.rgb(204, 204, 204), Color.rgb(204, 204, 204), Color.rgb(204, 204, 204));
         mRecyclerView.setRefreshListener(this);
@@ -80,8 +79,7 @@ public class NewActivity extends BaseMvpActivity<NewsPresenter> implements NewsC
                 forumDetailsListAdapter.resumeMore();
             }
         });
-        swipeRefreshLayout = new SwipeRefreshLayout(this);
-        swipeRefreshLayout.setColorSchemeResources(R.color.color_1c1c1c, R.color.color_888888);
+
         mRecyclerView.setAdapter(forumDetailsListAdapter);
 
 

@@ -77,7 +77,7 @@ public class LVCircularSmile extends View {
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
         mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setColor(Color.parseColor("#FF6347"));
+        mPaint.setColor(Color.parseColor("#BDBDBD"));
         mPaint.setStrokeWidth(dip2px(2));
 
     }

@@ -14,7 +14,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_UPDATES" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
-
+    <uses-permission android:name="android.permission.READ_LOGS" />
     <application
         android:name=".WinRoadApplication"
         android:allowBackup="true"
@@ -37,7 +37,11 @@
 
        <!-- 首页-->
         <activity android:name=".mvp.viewUi.activity.HomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".mvp.viewUi.activity.MainActivity">
 
@@ -45,11 +49,7 @@
 
 
         <activity android:name=".mvp.viewUi.activity.NewActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

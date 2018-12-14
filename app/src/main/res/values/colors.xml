@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#20000000</color>
-    <color name="colorPrimaryDark">#20000000</color>
-    <color name="colorAccent">#20000000</color>
+    <color name="colorPrimary">#BDBDBD</color>
+    <color name="colorPrimaryDark">#BDBDBD</color>
+    <color name="colorAccent">#BDBDBD</color>
 
     <color name="colorTitle">#4876FF</color>
     <color name="colorGray">#BDBDBD</color>
@@ -14,7 +14,7 @@
     <color name="grey700">#616161</color>
     <color name="red">#FF0000</color>
     <color name="text_black">#212121</color>
-    <color name="divider">#20000000</color>
+    <color name="divider">#20000000</color>//透明
     <color name="color_1c1c1c">#1c1c1c</color>
     <color name="color_888888">#888888</color>
     <color name="color_8f9897">#8f9897</color>
@@ -31,12 +31,12 @@
 
 
     <!--标题颜色-->
-    <color name="text_gray">#20000000</color>
-    <color name="common_main">#20000000</color>
+    <color name="text_gray">#BDBDBD</color>
+    <color name="common_main">#BDBDBD</color>
     <!--分割线-->
-    <color name="common_line">#ededed</color>
+    <color name="common_line">#BDBDBD</color>
     <!--页面背景颜色-->
-    <color name="common_background">#ffffff</color>
+    <color name="common_background">#f8f8f8</color>
 
 
     <!--*********************************************

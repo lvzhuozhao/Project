@@ -9,9 +9,11 @@ import static com.zyao89.view.zloading.Z_TYPE.PAC_MAN;
 
 public class Dolas {
 
+
     private static ZLoadingDialog dialog;
 
     public static void Doals(Context context) {
+
         dialog = new ZLoadingDialog(context);
         dialog.setLoadingBuilder(PAC_MAN)//设置类型
                 .setLoadingColor(Color.YELLOW)//颜色

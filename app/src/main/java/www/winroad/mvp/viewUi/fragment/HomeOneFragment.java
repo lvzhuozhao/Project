@@ -6,19 +6,23 @@ import android.support.annotation.NonNull;
 import www.winroad.R;
 import www.winroad.base.BaseMvpFragment;
 import www.winroad.basemvp.IPresenter;
+import www.winroad.mvp.presenter.HomePresenter;
 
 
-public class PersonalFragment extends BaseMvpFragment {
+public class HomeOneFragment extends BaseMvpFragment {
     @NonNull
     @Override
     protected IPresenter onLoadPresenter() {
-        return null;
+        return new HomePresenter();
     }
 
     @NonNull
     @Override
     protected int getLayoutResource() {
-        return R.layout.personal_fragmen_layout;
+
+        return R.layout.homeon_fragment;
+
+
     }
 
     @Override
@@ -26,5 +30,8 @@ public class PersonalFragment extends BaseMvpFragment {
 
     }
 
+    @Override
+    protected void lazyLoad() {
 
+    }
 }
